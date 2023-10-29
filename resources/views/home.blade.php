@@ -10,6 +10,7 @@
 
         @include('nav')
         @include('hero')
+        @include('products')
         @include('content')
         @include('footer')
     </body>

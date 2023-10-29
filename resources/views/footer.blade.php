@@ -24,4 +24,5 @@ align-items: center; background-color: #F3F3F3;">
         </span>
         <div class="tooltiptext">My Profile</div>
     </div>
+    &copy GSB 2023
 </div>

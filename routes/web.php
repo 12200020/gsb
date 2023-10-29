@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -15,4 +14,20 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('home');
+});
+
+Route::get('/login', function () {
+    return view('login');
+});
+
+Route::get('/register', function () {
+    return view('register');
+});
+
+
+Route::namespace('App\Http\Controllers')->group(function () {
+    // student
+    Route::post('/login', 'LoginController@login')->name('login');
+    Route::post('/register', 'LoginController@register')->name('register');
+    Route::post('/logout', 'LoginController@logout')->name('logout');
 });

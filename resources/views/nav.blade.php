@@ -28,6 +28,7 @@
     margin-left: -60px; /* Center the tooltip */
     opacity: 0;
     transition: opacity 0.3s;
+    font-size: 12px;
     }
 
     /* Tooltip Container on Hover */
@@ -46,10 +47,12 @@
         </div>
         <div style="display: flex;">
             <div style="cursor: pointer;" class="tooltip">
-                <span class="material-symbols-outlined">
+                <a href="{{ ('/') }}">
+                <span class="material-symbols-outlined" style="color: #333">
                 home
                 </span>
                 <div class="tooltiptext">Home</div>
+                </a>
             </div>
             <div style="margin-left: 2rem; cursor: pointer;" class="tooltip">
                 <span class="material-symbols-outlined">
@@ -64,12 +67,20 @@
                 <div class="tooltiptext">Products</div>
             </div>
         </div>
+        @if(Auth::check())
         <div style="font-size: 14px; cursor: pointer;" class="tooltip">
             <span class="material-symbols-outlined">
             person
             </span>
             <div class="tooltiptext">My Profile</div>
         </div>
+        <form action="{{ route('logout') }}" method="POST">
+            @csrf
+            <button type="submit">Logout</button>
+        </form>
+        @else
+        <a href="{{ ('login') }}">Login</a>
+        @endif
     </div>
     
 </body>

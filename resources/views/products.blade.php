@@ -2,9 +2,9 @@
     @for ($i = 0; $i < 4; $i++)
         <div style="border: 1px solid black; margin:2rem;">
             <img src="{{ asset('images/s1.jpeg') }}" style="width:100%;"/>
-            <div>Wolf cut</div>
+            <div>Product name</div>
             <div>Price</div>
-            <div>Barber</div>
+            <div>Describtion</div>
             <button>Book Appointment</button>
         </div>
 @endfor
