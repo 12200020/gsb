@@ -41,9 +41,9 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
 </head>
 <body style="padding:0; margin:0;">
-    <div style="background-color: #fff; padding:0.5rem; display:flex; justify-content:space-around; align-items:center; position:sticky; top:0">
-        <div>
-            <img src="{{ asset('images/logo.png') }}" style="height: 70px; width:100%; background-color:white"/>
+    <div style="background-color: #fff; padding:0.5rem; display:flex; justify-content:space-between; align-items:center; position:sticky; top:0">
+        <div style=" margin-left:2rem; padding:1rem;">
+            <img src="{{ asset('images/logo.png') }}" style="height: 40px; width:100%; background-color:white"/>
         </div>
         <div style="display: flex;">
             <div style="cursor: pointer;" class="tooltip">
@@ -66,22 +66,39 @@
                 </span>
                 <div class="tooltiptext">Products</div>
             </div>
+            @if(Auth::check())
+            <div style="margin-left: 2rem; margin-right: 2rem; font-size: 14px; cursor: pointer;" class="tooltip">
+                <span class="material-symbols-outlined">
+                person
+                </span>
+                <div class="tooltiptext">My Profile</div>
+            </div>
+
+            <div style="margin-right: 3rem;">
+                <form id="logoutForm" action="{{ route('logout') }}" method="POST">
+                    @csrf
+                    <span id="logoutButton" class="material-symbols-outlined" style="cursor: pointer;">
+                        Logout
+                    </span>
+                </form>
+            </div>
+            @else
+            <a href="{{ ('login') }}">Login</a>
+            @endif
         </div>
-        @if(Auth::check())
-        <div style="font-size: 14px; cursor: pointer;" class="tooltip">
-            <span class="material-symbols-outlined">
-            person
-            </span>
-            <div class="tooltiptext">My Profile</div>
-        </div>
-        <form action="{{ route('logout') }}" method="POST">
-            @csrf
-            <button type="submit">Logout</button>
-        </form>
-        @else
-        <a href="{{ ('login') }}">Login</a>
-        @endif
+
     </div>
     
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const logoutButton = document.getElementById('logoutButton');
+            const logoutForm = document.getElementById('logoutForm');
+    
+            logoutButton.addEventListener('click', function() {
+                logoutForm.submit();
+            });
+        });
+    </script>
+
 </body>
 </html>
