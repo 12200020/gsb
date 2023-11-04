@@ -13,6 +13,9 @@
             margin-top: 5px;
             display: none;
         }
+        html {
+            overflow: hidden;
+        }
     </style>
 </head>
 <body>
@@ -22,7 +25,7 @@
             <img src="{{ asset('images/logo.png') }}" alt="GSB logo" style="width:100%; height:auto">
             <form method="POST" action="{{ route('login') }}" onsubmit="return validateEmail()">
             @csrf
-                <h4>Login to CTT RS</h4>
+                <h4>Login to GSB</h4>
     
                 @if(Session::has('error'))
                     <div class="alert alert-danger">

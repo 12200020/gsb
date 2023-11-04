@@ -31,17 +31,23 @@ class LoginController extends Controller
     {
         $credentials = $request->only('email', 'password');
 
+        $user = User::where('email', $request->input('email'))->first();
+
+        if (!$user) {
+            Session::flash('error', 'No user found. Check your email.'); // Set error message
+            return back()->withErrors(['email' => 'Invalid credentials'])->withInput($request->except('password'));
+        }
+
         if (Auth::attempt($credentials)) {
             // Authentication passed
-            Session::flash('success', 'Login successful.'); // Set success message
-            return redirect('/');
+            // Session::flash('success', 'Login successful.'); // Set success message
 
             if (Auth::check()) {
                 $user = Auth::user();
             
                 if ($user->role === 'admin') {
-                    return redirect('/');
-                } elseif ($user->role === 'manager') {
+                    return redirect('/admin/products');
+                } elseif ($user->role === 'user') {
                     return redirect('/');
                 } else {
                     return redirect()->route('login');
@@ -52,7 +58,7 @@ class LoginController extends Controller
         }
 
         // Authentication failed
-        Session::flash('error', 'Invalid credentials. Please try again.'); // Set error message
+        Session::flash('error', 'Invalid password. Please try again.'); // Set error message
         return back()->withErrors(['email' => 'Invalid credentials'])->withInput($request->except('password'));
     }
 
