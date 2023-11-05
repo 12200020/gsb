@@ -32,7 +32,9 @@ font-family: Arial, sans-serif;">
     <form method="POST" action="{{ route('products.add') }}" enctype="multipart/form-data" style="margin-bottom: 20px;">
         @csrf {{-- Cross-site Request Forgery protection --}}
         <label for="name" style="font-weight: bold;">Product Name:</label>
-        <input type="text" id="name" name="name" required style="width: 100%; padding: 8px; margin-bottom: 10px; border: 1px solid #ccc; border-radius: 4px;"><br>
+        <input type="text" id="name" name="name" required style="width: 100%; padding: 8px; margin-bottom: 10px; border: 1px solid #ccc; border-radius: 4px;">
+        <input type="hidden" id="post_by" name="post_by" value="{{ auth()->id() }}">
+        <br>
 
         <label for="price" style="font-weight: bold;">Price:</label>
         <input type="number" id="price" name="price" required style="width: 100%; padding: 8px; margin-bottom: 10px; border: 1px solid #ccc; border-radius: 4px;"><br>

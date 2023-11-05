@@ -13,6 +13,7 @@ class ProductController extends Controller
         $product->name = $request->input('name');
         $product->price = $request->input('price');
         $product->description = $request->input('description');
+        $product->post_by = $request->input('post_by');
         
         // Handle image upload if needed
         if ($request->hasFile('image')) {
@@ -47,4 +48,36 @@ class ProductController extends Controller
 
         return response()->json(['message' => 'Product deleted successfully']);
     }
+
+    public function sort(Request $request)
+    {
+        $sortOption = $request->input('sort');
+
+        // Fetch products based on the sorting option
+        if ($sortOption === 'price_asc') {
+            $products = Product::orderBy('price')->get();
+        } elseif ($sortOption === 'price_desc') {
+            $products = Product::orderBy('price', 'desc')->get();
+        } elseif ($sortOption === 'name_asc') {
+            $products = Product::orderBy('name')->get();
+        } elseif ($sortOption === 'name_desc') {
+            $products = Product::orderBy('name', 'desc')->get();
+        }
+
+        return view('user/products', ['products' => $products]);
+    }
+
+    public function search(Request $request)
+    {
+        $searchTerm = $request->input('search');
+    
+        $products = Product::where(function($query) use ($searchTerm) {
+            $query->where('name', 'like', '%'.$searchTerm.'%')
+                  ->orWhere('price', 'like', '%'.$searchTerm.'%')
+                  ->orWhere('description', 'like', '%'.$searchTerm.'%');
+        })->get();
+    
+        return view('user/products', ['products' => $products]);
+    }
+    
 }

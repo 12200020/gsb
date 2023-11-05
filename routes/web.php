@@ -3,9 +3,10 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\ServiceController;
 use App\Models\Product;
 use App\Models\User;
-
+use Illuminate\Support\Facades\Auth;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -18,7 +19,9 @@ use App\Models\User;
 */
 
 Route::get('/', function () {
-    return view('home');
+    $products = Product::take(4)->get(); // Fetch the first four products from the database
+
+    return view('home', ['products' => $products]); // Pass the limited products data to the 'home' view
 });
 
 Route::get('/login', function () {
@@ -27,6 +30,35 @@ Route::get('/login', function () {
 
 Route::get('/register', function () {
     return view('register');
+});
+
+Route::get('/products', function () {
+    $products = Product::all(); // Fetch all products
+
+    return view('user/products', ['products' => $products]);
+});
+
+Route::get('/sort', [ProductController::class, 'sort'])->name('sortProducts');
+Route::get('/search', [ProductController::class, 'search'])->name('searchProducts');
+
+Route::get('/services', function () {
+    $products = Product::all(); // Fetch all products
+
+    return view('user/services', ['products' => $products]);
+});
+
+// Route to store a newly created service in the database
+Route::post('/services', [ServiceController::class, 'store'])->name('services.store');
+
+Route::get('/profile', function () {
+    // Get the authenticated user
+    $user = Auth::user();
+
+    // Retrieve all products
+    $products = Product::all(); // Or fetch the products related to the user, if needed
+
+    // Pass the user and products data to the user profile view
+    return view('user.profile', ['user' => $user, 'products' => $products]);
 });
 
 Route::get('/admin/products', function () {

@@ -55,32 +55,39 @@
                 </a>
             </div>
             <div style="margin-left: 2rem; cursor: pointer;" class="tooltip">
+                <a href="{{ ('/services') }}">
                 <span class="material-symbols-outlined">
                 work
                 </span>
                 <div class="tooltiptext">Services</div>
+                </a>
             </div>
             <div style="margin-left: 2rem; cursor: pointer;" class="tooltip">
+                <a href="{{ ('/products') }}">
                 <span class="material-symbols-outlined">
                 local_mall
                 </span>
                 <div class="tooltiptext">Products</div>
+                </a>
             </div>
             @if(Auth::check())
             <div style="margin-left: 2rem; margin-right: 2rem; font-size: 14px; cursor: pointer;" class="tooltip">
+                <a href="{{ ('/profile') }}">
                 <span class="material-symbols-outlined">
                 person
                 </span>
                 <div class="tooltiptext">My Profile</div>
+                </a>
             </div>
 
-            <div style="margin-right: 3rem;">
+            <div style="margin-right: 3rem;" class="tooltip">
                 <form id="logoutForm" action="{{ route('logout') }}" method="POST">
                     @csrf
                     <span id="logoutButton" class="material-symbols-outlined" style="cursor: pointer;">
                         Logout
                     </span>
                 </form>
+                <div class="tooltiptext">Logout</div>
             </div>
             @else
             <a href="{{ ('login') }}">Login</a>

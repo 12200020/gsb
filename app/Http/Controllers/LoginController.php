@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 
 class LoginController extends Controller
 {
@@ -65,19 +66,36 @@ class LoginController extends Controller
     public function register(Request $request)
     {
         // Validate user registration data
-        $request->validate([
+        $validator = Validator::make($request->all(), [
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:8|confirmed',
+            'image' => 'image|mimes:jpeg,png,jpg,gif|max:2048', // Assuming image is uploaded and max size is 2MB
+            'contact_number' => 'nullable|string|max:255', // Assuming contact number is optional
         ]);
-
+    
+        if ($validator->fails()) {
+            return back()
+                ->withErrors($validator)
+                ->withInput();
+        }
+    
+        // Handle image upload
+        if ($request->hasFile('image')) {
+            $imagePath = $request->file('image')->store('profile_images', 'public');
+        } else {
+            $imagePath = null;
+        }
+    
         // Create and save a new user record using the User model
         $user = User::create([
             'name' => $request->input('name'),
             'email' => $request->input('email'),
             'password' => Hash::make($request->input('password')),
+            'image' => $imagePath, // Save the image path
+            'contact_number' => $request->input('contact_number'),
         ]);
-
+    
         // Redirect or perform any other action after registration
         // return redirect('/login'); // Redirect to the dashboard or another page
         return back()->with('success', 'User added successfully.');

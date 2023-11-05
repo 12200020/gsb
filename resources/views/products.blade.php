@@ -1,11 +1,11 @@
-<div style="border: 1px solid black; display: flex; justify-content: space-around; flex:1; margin: 2rem 10rem 2rem 10rem ">
-    @for ($i = 0; $i < 4; $i++)
-        <div style="border: 1px solid black; margin:2rem;">
-            <img src="{{ asset('images/s1.jpeg') }}" style="width:100%;"/>
-            <div>Product name</div>
-            <div>Price</div>
-            <div>Describtion</div>
-            <button>Book Appointment</button>
+<div style="display: flex; flex-wrap: wrap; justify-content: space-around; margin: 2rem 10rem;">
+    @foreach($products as $product)
+        <div style="width: 20%; margin: 2rem; display: flex; flex-direction: column; align-items: center; text-align: center; background-color:#fff; border-radius:0.5rem;">
+            <img src="{{ asset('images/' . $product->image) }}" style="width: 100%; border-top-left-radius: 0.5rem; border-top-right-radius: 0.5rem;" alt="{{ $product->name }}" />
+            <div style="padding: 0.5rem;">{{ $product->name }}</div>
+            <div style="padding: 0.5rem;">Price: ${{ $product->price }}</div>
+            <div style="padding: 0.5rem;">{{ $product->description }}</div>
+            <button style="margin: 0.5rem; padding: 8px 20px; background-color: #4CAF50; color: white; border: none; border-radius: 4px; cursor: pointer;">Buy Now</button>
         </div>
-@endfor
+    @endforeach
 </div>
