@@ -65,7 +65,7 @@
                 </a>
             </div>
 
-            <div style="margin-right: 3rem;">
+            <div style="margin-right: 2rem;">
                 <form id="logoutForm" action="{{ route('logout') }}" method="POST">
                     @csrf
                     <span id="logoutButton" class="material-symbols-outlined" style="cursor: pointer;">

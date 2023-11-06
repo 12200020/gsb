@@ -5,6 +5,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ServiceController;
 use App\Models\Product;
+use App\Models\Service;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 /*
@@ -19,9 +20,10 @@ use Illuminate\Support\Facades\Auth;
 */
 
 Route::get('/', function () {
-    $products = Product::take(4)->get(); // Fetch the first four products from the database
+    $products = Product::take(8)->get(); // Fetch the first eight products from the database
+    $services = Service::take(8)->get(); // Fetch the first eight services from the database
 
-    return view('home', ['products' => $products]); // Pass the limited products data to the 'home' view
+    return view('home', ['products' => $products, 'services' => $services]);
 });
 
 Route::get('/login', function () {
@@ -42,9 +44,9 @@ Route::get('/sort', [ProductController::class, 'sort'])->name('sortProducts');
 Route::get('/search', [ProductController::class, 'search'])->name('searchProducts');
 
 Route::get('/services', function () {
-    $products = Product::all(); // Fetch all products
+    $services = Service::all(); // Fetch all products
 
-    return view('user/services', ['products' => $products]);
+    return view('user/services', ['services' => $services]);
 });
 
 // Route to store a newly created service in the database
@@ -56,9 +58,10 @@ Route::get('/profile', function () {
 
     // Retrieve all products
     $products = Product::all(); // Or fetch the products related to the user, if needed
+    $services = Service::take(8)->get(); // Fetch the first eight services from the database
 
     // Pass the user and products data to the user profile view
-    return view('user.profile', ['user' => $user, 'products' => $products]);
+    return view('user.profile', ['user' => $user, 'products' => $products, 'services' => $services]);
 });
 
 Route::get('/admin/products', function () {

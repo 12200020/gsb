@@ -80,7 +80,7 @@
                 </a>
             </div>
 
-            <div style="margin-right: 3rem;" class="tooltip">
+            <div style="margin-right: 2rem;" class="tooltip">
                 <form id="logoutForm" action="{{ route('logout') }}" method="POST">
                     @csrf
                     <span id="logoutButton" class="material-symbols-outlined" style="cursor: pointer;">
@@ -90,7 +90,16 @@
                 <div class="tooltiptext">Logout</div>
             </div>
             @else
-            <a href="{{ ('login') }}">Login</a>
+
+            <div style="margin-left: 2rem; margin-right: 2rem; font-size: 14px; cursor: pointer;" class="tooltip">
+            <a href="{{ ('login') }}">
+                <span class="material-symbols-outlined">
+                login
+                </span>
+                <div class="tooltiptext">Login</div>
+            </a>
+            </div>
+
             @endif
         </div>
 
