@@ -58,7 +58,14 @@ Route::get('/profile', function () {
 
     // Retrieve all products
     $products = Product::all(); // Or fetch the products related to the user, if needed
-    $services = Service::take(8)->get(); // Fetch the first eight services from the database
+    // Retrieve the authenticated user
+   // Retrieve the authenticated user
+    $user = auth()->user();
+
+    if ($user) {
+        // Retrieve all services added by the authenticated user
+        $services = Service::all()->where('post_by', $user->id);
+    }
 
     // Pass the user and products data to the user profile view
     return view('user.profile', ['user' => $user, 'products' => $products, 'services' => $services]);
