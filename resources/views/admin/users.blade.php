@@ -35,7 +35,7 @@
 <body style="background-color: #f5f5f5">
     @include('admin.nav')
 
-    <div class="container" style="padding: 0rem 3rem 3rem 3rem">
+    <div class="container" style="margin: 0 20rem 0 20rem; ">
         <h1>Users</h1>
         <table>
             <thead>

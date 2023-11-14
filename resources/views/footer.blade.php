@@ -1,69 +1,153 @@
-<div
-    style="padding: 0.5rem; display: flex; justify-content: space-between; 
-align-items: center; background-color: #ffffff;">
-    <div style="padding:3rem; margin-left:2rem;">
-        <img src="{{ asset('images/logo.png') }}" style="height: 70px; width:100%; background-color:white" />
-    </div>
-    
-    <div style="margin-right:5rem;">
-        <div style="margin-top: 1rem">
-            Services
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Design</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        /* Header Section */
+        .header {
+            padding: 1rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: #ffffff;
+        }
+
+        .logo {
+            padding: 1rem;
+            text-align: center;
+        }
+
+        .logo img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .menu {
+            text-align: center;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .social-links a {
+            margin: 0 0.5rem;
+        }
+
+        .social-links img {
+            width: 24px;
+            height: auto;
+        }
+
+        /* Footer Section */
+        .footer {
+            padding: 1rem;
+            background-color: #010203;
+            color: #ffffff;
+            display: flex;
+            justify-content: space-between;
+            padding-right: 1rem;
+        }
+
+        .scrollToTop {
+            cursor: pointer;
+        }
+
+        /* Media Queries for Responsive Design */
+        @media screen and (min-width: 768px) {
+            .header {
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+            }
+
+            .menu {
+                margin-top: 0;
+                margin-right: 10rem;
+            }
+        }
+
+        @media screen and (max-width: 768px) {
+            .social-links {
+                margin-right: 0.8rem;
+                margin-top: 2rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header Section -->
+    <div class="header">
+        <div class="logo">
+            <img src="{{ asset('images/logo.png') }}" alt="Logo" />
         </div>
-        <div style="margin-top: 1rem">
-            Products
+
+        <div class="menu">
+            <div style="margin-top: 1rem">
+                Services
+            </div>
+            <div style="margin-top: 1rem">
+                Products
+            </div>
+            <div style="margin-top: 1rem">
+                About Us
+            </div>
         </div>
-        <div style="margin-top: 1rem">
-            About Us
+
+        <div class="social-links">
+            <div>
+                <a href="https://www.facebook.com">
+                    <img src="{{ asset('images/social/fb.png') }}" alt="Facebook" />
+                </a>
+            </div>
+            <div>
+                <a href="https://www.x.com">
+                    <img src="{{ asset('images/social/x.png') }}" alt="X" />
+                </a>
+            </div>
+            <div>
+                <a href="https://www.instagram.com">
+                    <img src="{{ asset('images/social/ig.png') }}" alt="Instagram" />
+                </a>
+            </div>
         </div>
     </div>
 
-    <div style="margin-right:5rem;">
+    <!-- Footer Section -->
+    <div class="footer">
+        <div style="color: transparent">
+            .
+        </div>
         <div>
-            Facebook
+            &copy; GCIT Student Barber, GSB 2023
         </div>
-        <div style="margin-top: 1rem">
-            X
-        </div>
-        <div style="margin-top: 1rem">
-            Instagram
+        <div class="scrollToTop">
+            Back to Top
         </div>
     </div>
 
-    <div style="margin-right:5rem;">
-        <div>
-            Facebook
-        </div>
-        <div style="margin-top: 1rem">
-            X
-        </div>
-        <div style="margin-top: 1rem">
-            Instagram
-        </div>
-    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const scrollToTopElement = document.querySelector('.scrollToTop');
 
-</div>
-<div style="padding: 1rem; background-color: #010203; color:#ffffff; display:flex; justify-content:space-between;
-padding-right: 5rem;">
-    <div style="color: transparent">
-        .
-    </div>
-    <div>
-        &copy GCIT Student Barber, GSB 2023
-    </div>
-    <div id="scrollToTop" style="cursor: pointer;">
-        Back to Top
-    </div>
-</div>
-
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const scrollToTopElement = document.getElementById('scrollToTop');
-
-        scrollToTopElement.addEventListener('click', function() {
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
+            scrollToTopElement.addEventListener('click', function() {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
             });
         });
-    });
-</script>
+    </script>
+</body>
+
+</html>

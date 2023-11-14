@@ -25,7 +25,7 @@ font-family: Arial, sans-serif;">
 
     @include('admin.nav')
     
-    <div style="padding: 2rem">
+    <div style="padding: 2rem; margin: 0 20rem 0 20rem; ">
 
     <h1 style="margin-bottom: 20px;">Add a Product</h1>
 
