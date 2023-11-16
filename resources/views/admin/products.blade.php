@@ -10,26 +10,104 @@
             overflow: scroll;
             overflow-x: hidden;
         }
+
         ::-webkit-scrollbar {
-            width: 0;  /* Remove scrollbar space */
-            background: transparent;  /* Optional: just make scrollbar invisible */
+            width: 0;
+            background: transparent;
         }
-        /* Optional: show position indicator in red */
+
         ::-webkit-scrollbar-thumb {
             background: #FF0000;
         }
+
+        /* session alert */
+        .alert {
+            padding: 15px;
+            margin-bottom: 20px;
+            border: 1px solid transparent;
+            border-radius: 4px;
+            font-size: smaller;
+        }
+
+        .alert-danger {
+            background-color: #f2dede;
+            border-color: #ebccd1;
+            color: #a94442;
+        }
+
+        .alert.alert-success {
+            background-color: #d4edda;
+            border-color: #c3e6cb;
+            color: #155724;
+        }
+
+        button {
+            background-color: #dc3545;
+            color: #fff;
+            border: none;
+            padding: 8px 16px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #c82333;
+        }
+
+        /* Responsive layout */
+        @media only screen and (max-width: 600px) {
+            body {
+                padding: 0;
+            }
+
+            div {
+                margin: 0;
+            }
+
+            form, ul {
+                width: 100%;
+            }
+
+            h1 {
+                font-size: 1.5rem;
+            }
+
+            li {
+                flex-direction: column;
+            }
+
+            button {
+                width: 100%;
+            }
+
+            /* Adjust padding and margin for the outer div */
+            div {
+                padding: 1rem;
+                margin: 0;
+            }
+        }
     </style>
 </head>
-<body style="background-color: #f5f5f5; padding: 0; margin: 0; 
-font-family: Arial, sans-serif;">
+<body style="background-color: #f5f5f5; padding: 0; margin: 0; font-family: Arial, sans-serif;">
 
     @include('admin.nav')
     
-    <div style="padding: 2rem; margin: 0 20rem 0 20rem; ">
+    <div style="padding: 2rem; margin: 0 1rem; ">
 
     <h1 style="margin-bottom: 20px;">Add a Product</h1>
 
-    <form method="POST" action="{{ route('products.add') }}" enctype="multipart/form-data" style="margin-bottom: 20px;">
+    @if(Session::has('success'))
+        <div class="alert alert-success">
+            {{ Session::get('success') }}
+        </div>
+    @endif
+
+    @if(Session::has('error'))
+        <div class="alert alert-danger">
+            {{ Session::get('error') }}
+        </div>
+    @endif
+
+    <form method="POST" action="{{ route('products.add') }}" enctype="multipart/form-data" style="margin-bottom: 20px; max-width: 600px;">
         @csrf {{-- Cross-site Request Forgery protection --}}
         <label for="name" style="font-weight: bold;">Product Name:</label>
         <input type="text" id="name" name="name" required style="width: 100%; padding: 8px; margin-bottom: 10px; border: 1px solid #ccc; border-radius: 4px;">
@@ -45,22 +123,41 @@ font-family: Arial, sans-serif;">
         <label for="image" style="font-weight: bold;">Image:</label>
         <input type="file" id="image" name="image" style="margin-bottom: 20px;"><br>
 
-        <button type="submit" style="padding: 10px 20px; background-color: #4CAF50; color: white; border: none; border-radius: 4px; cursor: pointer;">Add Product</button>
+        <button type="submit"
+         style="padding: 10px 20px; color: white; 
+         background:#4CAF50;
+         border: none; border-radius: 4px; cursor: pointer;">Add Product</button>
     </form>
+
+    <hr>
 
     <h1 style="margin-bottom: 20px;">All Products</h1>
 
     <ul style="list-style: none; padding: 0;">
         @foreach($products as $product)
-            <li style="background-color: #fff; padding: 15px; border: 1px solid #ccc; border-radius: 4px; margin-bottom: 10px;">
-                <strong style="font-weight: bold;">Name:</strong> {{ $product->name }}<br>
-                <strong style="font-weight: bold;">Price:</strong> ${{ $product->price }}<br>
-                <strong style="font-weight: bold;">Description:</strong> {{ $product->description }}<br>
-                @if($product->image)
-                    <img src="{{ asset('images/' . $product->image) }}" alt="Product Image" style="max-width: 200px; margin-top: 10px; border: 1px solid #ccc; border-radius: 4px;">
-                @endif
+            <li style="display: flex; align-items: center; justify-content: space-between; background-color: #fff; padding: 15px; border: 1px solid #ccc; border-radius: 4px; margin-bottom: 10px; max-width: 600px;">
+
+            <div style="flex: 1;">
+                    @if($product->image)
+                        <img src="{{ asset('images/' . $product->image) }}" alt="Product Image" style="max-width: 200px; border: 1px solid #ccc; border-radius: 4px;">
+                    @endif
+                </div>
+                
+                <div style="flex: 1;">
+                <p>Name:</strong> {{ $product->name }}</p>
+                <p>Price:</strong> {{ $product->price }}</p>
+                <p>Description:</strong> {{ $product->description }}</p>
+                </div>
+            
+                <div>
+                    <!-- In your view or blade file -->
+                    <form action="{{ route('products.delete', ['id' => $product->id]) }}" method="post">
+                        @csrf
+                        @method('delete')
+                        <button type="submit" style="color: #fff; padding: 10px; border: none; border-radius: 4px;">Delete Product</button>
+                    </form>
+                </div>
             </li>
-            <br>
         @endforeach
     </ul>
 

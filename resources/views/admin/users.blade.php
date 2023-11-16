@@ -7,35 +7,75 @@
     <title>Users</title>
     <style>
         body {
-            padding: 0;
             margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+            font-family: Arial, sans-serif;
         }
 
         table {
             border-collapse: collapse;
             width: 100%;
-            font-family: Arial, sans-serif;
+            margin: 20px 0;
         }
 
         th, td {
             border: 1px solid #000;
-            padding: 8px;
+            padding: 12px;
             text-align: left;
         }
 
         th {
-            background-color: #f2f2f2; /* Adding a light gray background to header cells */
+            background-color: #f2f2f2;
         }
 
         tr:nth-child(even) {
-            background-color: #f9f9f9; /* Adding a different background color to even rows */
+            background-color: #f9f9f9;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+        }
+
+        form {
+            margin: 0;
+        }
+
+        button {
+            background-color: #dc3545;
+            color: #fff;
+            border: none;
+            padding: 8px 16px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #c82333;
+        }
+
+        .container {
+            margin: 0 20rem;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                margin: 0 1rem;
+            }
+
+            table {
+                font-size: 14px;
+            }
+
+            th, td {
+                padding: 10px;
+            }
         }
     </style>
 </head>
-<body style="background-color: #f5f5f5">
+<body>
     @include('admin.nav')
 
-    <div class="container" style="margin: 0 20rem 0 20rem; ">
+    <div class="container">
         <h1>Users</h1>
         <table>
             <thead>
@@ -56,7 +96,7 @@
                             <form method="POST" action="{{ route('users.delete', ['id' => $user->id]) }}">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" style="background-color: red; color: white; border: none; padding: 6px 12px;">Delete</button>
+                                <button type="submit">Delete</button>
                             </form>
                         </td>
                     </tr>

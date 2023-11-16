@@ -26,15 +26,15 @@
         @include('nav')
         @include('hero')
 
-        <h1 style="margin-top: 5rem; text-align:center">
+        <h2 style="margin-top: 5rem; text-align:center">
             Products
-        </h1>
+        </h2>
 
         @include('products')
 
-        <h1 style="margin-top: 3rem; text-align:center">
+        <h2 style="margin-top: 3rem; text-align:center">
             Services
-        </h1>
+        </h2>
 
         @include('services')
         @include('footer')

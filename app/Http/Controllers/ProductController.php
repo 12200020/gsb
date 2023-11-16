@@ -25,7 +25,8 @@ class ProductController extends Controller
 
         $product->save();
 
-        return response()->json(['message' => 'Product added successfully']);
+        // return response()->json(['message' => 'Product added successfully']);
+        return back()->with('success', 'Product added successfully');
     }
 
     public function deleteProduct($id)
@@ -46,7 +47,8 @@ class ProductController extends Controller
 
         $product->delete();
 
-        return response()->json(['message' => 'Product deleted successfully']);
+        return back()->with('success', 'Product deleted successfully');
+        // return response()->json(['message' => 'Product deleted successfully']);
     }
 
     public function sort(Request $request)

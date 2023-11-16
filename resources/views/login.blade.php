@@ -14,13 +14,13 @@
             display: none;
         }
         html {
-            overflow: hidden;
+            overflow-x: hidden;
         }
     </style>
 </head>
-<body>
+<body style="padding-bottom: 2rem;">
     @include('nav')
-    <div style="display: flex; justify-content:center; align-items:center; margin-top: 4rem;">
+    <div style="display: flex; justify-content:center; align-items:center; margin-top: 2rem;">
         <div class="login-container">
             <img src="{{ asset('images/logo.png') }}" alt="GSB logo" style="width:100%; height:auto">
             <form method="POST" action="{{ route('login') }}" onsubmit="return validateEmail()">

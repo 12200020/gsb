@@ -21,7 +21,33 @@ use Illuminate\Support\Facades\Auth;
 
 Route::get('/', function () {
     $products = Product::take(8)->get(); // Fetch the first eight products from the database
+    
+    foreach ($products as $product) {
+        // Assuming 'post_by' is the foreign key in the 'products' table
+        $userId = $product->post_by;
+
+        // Fetch the contact number using the User model
+        $user = User::find($userId);
+
+        if ($user) {
+            // Add contact number to the product
+            $product->contact_number = $user->contact_number;
+        }
+    }
+    
     $services = Service::take(8)->get(); // Fetch the first eight services from the database
+    foreach ($services as $service) {
+        // Assuming 'post_by' is the foreign key in the 'products' table
+        $userId = $service->post_by;
+
+        // Fetch the contact number using the User model
+        $user = User::find($userId);
+
+        if ($user) {
+            // Add contact number to the product
+            $service->contact_number = $user->contact_number;
+        }
+    }
 
     return view('home', ['products' => $products, 'services' => $services]);
 });
@@ -37,6 +63,19 @@ Route::get('/register', function () {
 Route::get('/products', function () {
     $products = Product::all(); // Fetch all products
 
+    foreach ($products as $product) {
+        // Assuming 'post_by' is the foreign key in the 'products' table
+        $userId = $product->post_by;
+
+        // Fetch the contact number using the User model
+        $user = User::find($userId);
+
+        if ($user) {
+            // Add contact number to the product
+            $product->contact_number = $user->contact_number;
+        }
+    }
+    
     return view('user/products', ['products' => $products]);
 });
 
@@ -45,6 +84,19 @@ Route::get('/search', [ProductController::class, 'search'])->name('searchProduct
 
 Route::get('/services', function () {
     $services = Service::all(); // Fetch all products
+
+    foreach ($services as $service) {
+        // Assuming 'post_by' is the foreign key in the 'products' table
+        $userId = $service->post_by;
+
+        // Fetch the contact number using the User model
+        $user = User::find($userId);
+
+        if ($user) {
+            // Add contact number to the product
+            $service->contact_number = $user->contact_number;
+        }
+    }
 
     return view('user/services', ['services' => $services]);
 });
@@ -94,6 +146,7 @@ Route::namespace('App\Http\Controllers')->group(function () {
 Route::post('/products', [ProductController::class, 'addProduct'])->name('products.add');
 
 // Route for deleting a product
-Route::delete('/products/{id}', [ProductController::class, 'deleteProduct']);
+Route::delete('/products/{id}', [ProductController::class, 'deleteProduct'])->name('products.delete');
+Route::delete('/services/{id}', [ServiceController::class, 'destroy'])->name('services.delete');
 
 Route::delete('/users/{id}', [UserController::class, 'deleteUser'])->name('users.delete');

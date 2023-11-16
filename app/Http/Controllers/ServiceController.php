@@ -38,4 +38,28 @@ class ServiceController extends Controller
         return back();
     }
 
+        // Method to delete a service
+        public function destroy($id)
+        {
+            $service = Service::findOrFail($id);
+    
+            // Check if the authenticated user is the owner of the service
+            if (auth()->id() != $service->post_by) {
+                return redirect()->back()->with('error', 'You do not have permission to delete this service.');
+            }
+    
+            // Delete the service's image if it exists
+            if (!empty($service->image)) {
+                $imagePath = public_path('images/' . $service->image);
+                if (file_exists($imagePath)) {
+                    unlink($imagePath);
+                }
+            }
+    
+            // Delete the service from the database
+            $service->delete();
+    
+            return redirect()->back()->with('success', 'Service deleted successfully.');
+        }
+
 }

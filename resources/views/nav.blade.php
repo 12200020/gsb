@@ -63,7 +63,7 @@
 
         .navigation-links {
             display: flex;
-            padding-bottom: 0.6rem;
+            /* padding-bottom: 0.6rem; */
         }
 
         .tooltip-link {

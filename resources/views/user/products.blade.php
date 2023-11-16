@@ -25,9 +25,9 @@
 
         @include('nav')
 
-        <h2 style="margin-left: 4rem">
+        <h1 style="text-align:center;">
             Products
-        </h2>
+        </h1>
 
         <div style="display: flex; justify-content: center;">
             <form action="{{ route('searchProducts') }}" method="GET" style="display: flex;">

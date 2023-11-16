@@ -10,9 +10,10 @@ class Product extends Model
 
     // Additional methods or relationships can be defined here
 
-    // Example: A product belongs to a category
-    public function category()
+    // Product model
+    public function user()
     {
-        return $this->belongsTo(Category::class);
+        return $this->belongsTo(User::class, 'post_by', 'id');
     }
+
 }
