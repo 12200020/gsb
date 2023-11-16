@@ -84,7 +84,7 @@
                 Elevate Your Style, Strenghtening Community
             </h1>
             <a href="/services" style="display: inline-block; 
-            padding: 1.3vw 3vw; 
+            padding: 0.9vw 3vw; 
             background-color: #fff; color: #000; text-decoration: none; 
             border-radius: 25px; margin-top: 5vw;">
                 Explore

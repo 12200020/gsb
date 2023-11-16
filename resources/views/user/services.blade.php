@@ -25,9 +25,12 @@
        
         @include('nav')
         
-        <h1 style="text-align:center;">
-            Services
-        </h1>
+        <h2 style="margin-top: 5rem; text-align:center; text-weight:bold;">
+            GSB Hair Services
+        </h2>
+        <div style="text-align:center; text-weight:bold; color:grey; margin-bottom:1rem;">
+            Get your favourite cut from GCIT talents       
+        </div>
 
         @include('services')
         @include('footer')

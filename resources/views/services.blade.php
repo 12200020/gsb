@@ -1,3 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Products</title>
+    <style>
+        @media (max-width: 1200px) {
+            .product {
+                width: 30% !important;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .product {
+                width: 45% !important;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .product {
+                width: 100% !important;
+                margin: 1rem 0 !important;
+            }
+        }
+    </style>
 
 <style>
     /* Add this style for the default button appearance */
@@ -18,49 +44,57 @@
     }
 </style>
 
-<div style="display: flex; flex-wrap: wrap; justify-content: space-around; margin: 2rem 10rem;">
-    @foreach($services as $s)
-        <div style="width: 20%; margin: 2rem; display: flex; flex-direction: column; align-items: center; text-align: center; background-color:#fff; border-radius:0.5rem;">
+</head>
+<body>
+    <div style="display: flex; flex-wrap: wrap; justify-content: space-around; margin: 2rem 5%;">
 
-            <div class="product" style="width: 100%; display: flex; flex-direction: column; align-items: center; text-align: center; background-color: #fff; border-radius: 0.5rem; padding-bottom:0.5rem; overflow: hidden;">
-                <!-- ... -->
-                <img src="{{ asset('images/' . $s->image) }}" style="width: 100%; border-top-left-radius: 0.5rem; border-top-right-radius: 0.5rem; transition: transform 0.3s ease;" alt="{{ $s->name }}" onmouseover="zoomIn(this)" onmouseout="zoomOut(this)" />
-                <!-- ... -->
-            </div>
-
-            <div style="padding: 0.5rem; font-size:12px; color:grey;">{{ date('F j, Y, g:i a', strtotime($s->created_at)) }}</div>
-            <div style="padding: 0.5rem;">{{ $s->service_name }}</div>
-            <div style="padding: 0.5rem;">Price: Nu.{{ $s->price }}</div>
-            <div style="padding: 0.5rem;">{{ $s->description }}</div>
-
-            @if(auth()->id() != $s->post_by)
-            <button 
-                onClick="go( {{ $s->contact_number }})"
-                style="margin: 0.5rem; padding: 10px 25px; cursor: pointer;">
-                    Contact Now
-                </button>
-             @endif
-
-            @if(auth()->id() == $s->post_by)
-                <form action="{{ route('services.delete', $s->id) }}" method="POST" style="display: inline;">
-                    @csrf
-                    @method('DELETE')
-
-                    <button type="submit" style="margin: 0.5rem; padding: 8px 20px; background-color: #dc3545;
-             color: white; border: none; border-radius: 4px; cursor: pointer;">Delete</button>
-                </form>
-            @endif
-
-        </div>
-    @endforeach
+        @foreach($services as $s)
+            <div class="product" style="width: 20%; margin: 2rem; display: flex; flex-direction: column; align-items: center; text-align: center; background-color: #fff; border-radius: 0.5rem; padding-bottom:0.5rem;">
+                
+                @if(file_exists(public_path('images/' . $s->image)))
+<!-- ... -->
+<div class="product" style="min-width: 100%; display: flex; flex-direction: column; align-items: center; text-align: center; background-color: #fff; border-radius: 0.5rem; padding-bottom:0.5rem; overflow: hidden;">
+    <!-- ... -->
+    <img src="{{ asset('images/' . $s->image) }}" style="width: 100%; border-top-left-radius: 0.5rem; border-top-right-radius: 0.5rem; transition: transform 0.3s ease;" alt="{{ $s->name }}" onmouseover="zoomIn(this)" onmouseout="zoomOut(this)" />
+    <!-- ... -->
 </div>
+<!-- ... -->
+                @else
+                    <div style="width: 100%; height: 320px; background-color: #868686; border-top-left-radius: 0.5rem; border-top-right-radius: 0.5rem; display: flex; justify-content: center; align-items: center;">
+                        <p style="color: #d3d3d3;">Image Not Found</p>
+                    </div>
+                @endif
+                
+                <div style="padding: 0.5rem; font-size: 14px; color: grey;">
+                    {{ date('F j, Y, g:i a', strtotime($s->created_at)) }}
+                </div>
+                <div style="padding: 0.5rem;">
+                    {{ $s->service_name }}
+                </div>
+                <div style="padding: 0.5rem; color:#0f5b3f; font-size:16px;
+                font-weight: bold;">
+                    Nu.{{ $s->price }}
+                </div>
+                <div style="padding: 0.5rem; font-size: 16px; color: grey;">
+                    {{ $s->description }}
+                </div>
+                <button 
+                onClick="go( {{ $s->contact_number }})"
+                style="margin: 0.5rem; padding: 10px 25px; cursor: pointer; margin-bottom:1rem;">
+                    Buy Now
+                </button>
+            </div>
+        @endforeach
+        <!-- {{ json_encode($services, JSON_PRETTY_PRINT) }} -->
 
-<script>
+    </div>
+
+    <script>
     function go(phoneNumber) {
         // Open the link in a new tab
         window.open('https://wa.me/' + phoneNumber, '_blank');
     }
-</script>
+    </script>
 
 <script>
     function zoomIn(element) {
@@ -71,3 +105,6 @@
         element.style.transform = "scale(1)";
     }
 </script>
+
+</body>
+</html>

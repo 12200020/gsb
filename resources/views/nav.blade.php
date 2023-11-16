@@ -114,9 +114,11 @@
 </head>
 <body>
     <div class="nav-container">
-        <div class="logo">
-            <img src="{{ asset('images/logo.png') }}" style="max-width: 100%; height: auto; background-color: white;" alt="Logo">
-        </div>
+        <a href="/">
+            <div class="logo">
+                <img src="{{ asset('images/logo.png') }}" style="max-width: 100%; height: auto; background-color: white;" alt="Logo">
+            </div>
+        </a>
 
         <div class="navigation-links">
             <!-- Home Link -->

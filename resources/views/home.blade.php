@@ -26,15 +26,21 @@
         @include('nav')
         @include('hero')
 
-        <h2 style="margin-top: 5rem; text-align:center">
-            Products
+        <h2 style="margin-top: 5rem; text-align:center; text-weight:bold;">
+            Hair Products for Purchase
         </h2>
+        <div style="text-align:center; text-weight:bold; color:grey">
+        Get discount on your first purchase        
+        </div>
 
         @include('products')
 
         <h2 style="margin-top: 3rem; text-align:center">
-            Services
+            GSB Services
         </h2>
+        <div style="text-align:center; text-weight:bold; color:grey">
+            Get your favourite cut from GCIT talents       
+        </div>
 
         @include('services')
         @include('footer')

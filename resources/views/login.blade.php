@@ -47,7 +47,7 @@
                 <input type="password" placeholder="Password" name="password" required>
     
                 <div class="forgot-password">
-                    <a href="{{ ('forgot-password') }}">Forgot Password?</a>
+                    <a href="#">Forgot Password?</a>
                 </div>
     
                 <button type="submit">Login</button>

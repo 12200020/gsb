@@ -80,7 +80,7 @@
                 </div>
                 <button 
                 onClick="go( {{ $product->contact_number }})"
-                style="margin: 0.5rem; padding: 10px 25px; cursor: pointer;">
+                style="margin: 0.5rem; padding: 10px 25px; cursor: pointer; margin-bottom:1rem;">
                     Buy Now
                 </button>
             </div>

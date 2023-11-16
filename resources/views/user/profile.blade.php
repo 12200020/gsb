@@ -78,9 +78,15 @@
         }
 
         input,
-        textarea,
-        button {
+        textarea {
             width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        button {
             padding: 8px;
             margin-bottom: 10px;
             border: 1px solid #ccc;
